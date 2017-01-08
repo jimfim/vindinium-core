@@ -1,0 +1,8 @@
+{
+  "profiles": {
+    "vindinium-core": {
+      "commandName": "Project",
+      "commandLineArgs": "4bxz95pv training 100 http://vindinium.org/ m2"
+    }
+  }
+}
