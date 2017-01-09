@@ -6,12 +6,11 @@
   </PropertyGroup>
   <Import Project="$(VSToolsPath)\DotNet\Microsoft.DotNet.Props" Condition="'$(VSToolsPath)' != ''" />
   <PropertyGroup Label="Globals">
-    <ProjectGuid>c4cba38c-ecd1-4d40-a582-b93ec2ff087f</ProjectGuid>
-    <RootNamespace>vindinium-core</RootNamespace>
+    <ProjectGuid>afe9401f-18f5-45a4-8fa6-d8a8a6ce621b</ProjectGuid>
+    <RootNamespace>vindinium</RootNamespace>
     <BaseIntermediateOutputPath Condition="'$(BaseIntermediateOutputPath)'=='' ">.\obj</BaseIntermediateOutputPath>
     <OutputPath Condition="'$(OutputPath)'=='' ">.\bin\</OutputPath>
   </PropertyGroup>
-
   <PropertyGroup>
     <SchemaVersion>2.0</SchemaVersion>
   </PropertyGroup>
