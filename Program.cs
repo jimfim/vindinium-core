@@ -21,6 +21,7 @@ namespace vindinium
             string serverUrl = args.Length == 4 ? args[3] : "http://vindinium.org";
 
 
+            IMapper mapper = provider.GetService<IMapper>();
             Server server = new Server(args[0], args[1] != "arena", uint.Parse(args[2]), serverUrl, args[4], mapper);
             server.CreateGame();
             if (server.Errored == false)
