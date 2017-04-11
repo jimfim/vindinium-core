@@ -20,10 +20,10 @@ namespace vindiniumcore.Infrastructure.Behaviors.Map
 
 		public MapNode(Tile type, int x, int y)
 		{
-			this.Type = type;
-			this.Passable = false;
-			this.Location = new CoOrdinates(x, y);
-            this.MovementCost = Int32.MaxValue;
+			Type = type;
+			Passable = false;
+			Location = new CoOrdinates(x, y);
+            MovementCost = Int32.MaxValue;
         }
 	}
 }

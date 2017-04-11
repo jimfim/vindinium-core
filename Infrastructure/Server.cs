@@ -6,11 +6,10 @@ using System.Net.Http;
 using System.Runtime.Serialization.Json;
 using System.Text;
 using AutoMapper;
-using vindiniumcore.Infrastructure;
 using vindiniumcore.Infrastructure.Behaviors.Map;
 using vindiniumcore.Infrastructure.DTOs;
 
-namespace vindiniumcore
+namespace vindiniumcore.Infrastructure
 {
     public class Server
     {
@@ -22,7 +21,7 @@ namespace vindiniumcore
         public Server(VindiniumSettings vindiniumSettings, IMapper mapper)
         {
             _vindiniumSettings = vindiniumSettings;
-            this._mapper = mapper;
+            _mapper = mapper;
         }
 
         public string ViewUrl { get; private set; }
@@ -245,8 +244,7 @@ namespace vindiniumcore
 
             MyHero = _mapper.Map<HeroNode>(gameResponse.hero);
             Villians = _mapper.Map<List<VillianNode>>(gameResponse.game.heroes.Where(h => h.id != MyHero.Id));
-            AllCharacters = new List<IMapNode>();
-            AllCharacters.Add(MyHero);
+            AllCharacters = new List<IMapNode> {MyHero};
             AllCharacters.AddRange(Villians);
 
             CurrentTurn = gameResponse.game.turn;
@@ -261,12 +259,12 @@ namespace vindiniumcore
 
         private void PopulateNodeParents()
         {
-            for (var x = 0; x < Board.Length; x++)
+            foreach (IMapNode[] t in Board)
             {
-                for (var y = 0; y < Board[x].Length; y++)
+                foreach (IMapNode t1 in t)
                 {
-                    var node = Board[x][y];
-                    var parents = GetParents(Board[x][y]);
+                    var node = t1;
+                    var parents = GetParents(t1);
                     node.Parents = parents;
                 }
             }

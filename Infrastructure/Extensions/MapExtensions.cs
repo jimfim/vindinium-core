@@ -3,7 +3,7 @@ using System.Linq;
 using vindiniumcore.Infrastructure.Behaviors.Map;
 using vindiniumcore.Infrastructure.DTOs;
 
-namespace vindiniumcore.Infrastructure.Behaviors.Extensions
+namespace vindiniumcore.Infrastructure.Extensions
 {
     public static class MapExtensions
     {
@@ -97,9 +97,9 @@ namespace vindiniumcore.Infrastructure.Behaviors.Extensions
             var viableTargets = new List<IMapNode>();
             for (int y = 0; y < server.Board.Length; y++)
             {
-                for (int x = 0; x < server.Board.Length; x++)
+                foreach (IMapNode[] t in server.Board)
                 {
-                    viableTargets.AddRange(from tile in tileset where server.Board[x][y].Type == tile select server.Board[x][y]);
+                    viableTargets.AddRange(from tile in tileset where t[y].Type == tile select t[y]);
                 }
             }
             return viableTargets;

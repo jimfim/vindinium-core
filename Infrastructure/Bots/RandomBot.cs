@@ -6,13 +6,7 @@ namespace vindiniumcore.Infrastructure.Bots
 {
     class RandomBot : IBot
     {
-		public string BotName
-		{
-			get
-			{
-				return "RandomBot";
-			}
-		}
+		public string BotName => "RandomBot";
 
         private readonly Server server;
 
@@ -26,45 +20,45 @@ namespace vindiniumcore.Infrastructure.Bots
         {
             Console.Out.WriteLine("random bot running");
 
-            this.server.CreateGame();
+            server.CreateGame();
 
-            if (this.server.Errored == false)
+            if (server.Errored == false)
             {
                 //opens up a webpage so you can view the game, doing it async so we dont time out
                 new Thread(delegate()
                 {
-                    System.Diagnostics.Process.Start(this.server.ViewUrl);
+                    System.Diagnostics.Process.Start(server.ViewUrl);
                 }).Start();
             }
             
             Random random = new Random();
-            while (this.server.Finished == false && this.server.Errored == false)
+            while (server.Finished == false && server.Errored == false)
             {
                 switch(random.Next(0, 6))
                 {
                     case 0:
-                        this.server.MoveHero(Direction.East);
+                        server.MoveHero(Direction.East);
                         break;
                     case 1:
-                        this.server.MoveHero(Direction.North);
+                        server.MoveHero(Direction.North);
                         break;
                     case 2:
-                        this.server.MoveHero(Direction.South);
+                        server.MoveHero(Direction.South);
                         break;
                     case 3:
-                        this.server.MoveHero(Direction.Stay);
+                        server.MoveHero(Direction.Stay);
                         break;
                     case 4:
-                        this.server.MoveHero(Direction.West);
+                        server.MoveHero(Direction.West);
                         break;
                 }
 
-                Console.Out.WriteLine("completed turn " + this.server.CurrentTurn);
+                Console.Out.WriteLine("completed turn " + server.CurrentTurn);
             }
 
-            if (this.server.Errored)
+            if (server.Errored)
             {
-                Console.Out.WriteLine("error: " + this.server.ErrorText);
+                Console.Out.WriteLine("error: " + server.ErrorText);
             }
 
             Console.Out.WriteLine("random bot Finished");

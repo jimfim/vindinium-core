@@ -16,7 +16,7 @@ namespace vindiniumcore.Infrastructure.Bots
 
         public Robot(Server server)
         {
-            this._server = server; 
+            _server = server; 
         }
 
         public string BotName => "Robot";
@@ -24,7 +24,7 @@ namespace vindiniumcore.Infrastructure.Bots
         //starts everything
         public void Run()
         {
-            while (this._server.Finished == false && this._server.Errored == false)
+            while (_server.Finished == false && _server.Errored == false)
             {
                 _tactic = new SurvivalGoldRush(_server);
                 _pathFinding = new ShortestPath(_server);
@@ -37,11 +37,11 @@ namespace vindiniumcore.Infrastructure.Bots
                 if (route != null)
                 {
                     
-                    direction = this._server.GetDirection(_server.MyHero.Location, route.Any() ? route.First().Location : null);
+                    direction = _server.GetDirection(_server.MyHero.Location, route.Any() ? route.First().Location : null);
                 }
                 
 
-                this._server.MoveHero(direction);
+                _server.MoveHero(direction);
                 Console.Clear();
                 VisualizeMap(_server, route);
                 Console.Out.WriteLine("=========================================");
@@ -55,13 +55,13 @@ namespace vindiniumcore.Infrastructure.Bots
                 Console.Out.WriteLine("Hero Mines \t: {0}", (_server.MyHero as HeroNode).MineCount);
                 Console.Out.WriteLine("Hero Moving \t: {0}", direction);
                 Console.Out.WriteLine("=========================================");
-                Console.Out.WriteLine("Completed Turn " + this._server.CurrentTurn);
+                Console.Out.WriteLine("Completed Turn " + _server.CurrentTurn);
                       
             }
 
-            if (this._server.Errored)
+            if (_server.Errored)
             {
-                Console.Out.WriteLine("error: " + this._server.ErrorText);
+                Console.Out.WriteLine("error: " + _server.ErrorText);
             }
             Console.Out.WriteLine("{0} Finished", BotName);
         }

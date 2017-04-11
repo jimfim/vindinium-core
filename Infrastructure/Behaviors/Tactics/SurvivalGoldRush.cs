@@ -1,5 +1,5 @@
-﻿using vindiniumcore.Infrastructure.Behaviors.Extensions;
-using vindiniumcore.Infrastructure.Behaviors.Map;
+﻿using vindiniumcore.Infrastructure.Behaviors.Map;
+using vindiniumcore.Infrastructure.Extensions;
 
 namespace vindiniumcore.Infrastructure.Behaviors.Tactics
 {
@@ -9,7 +9,7 @@ namespace vindiniumcore.Infrastructure.Behaviors.Tactics
 
         public SurvivalGoldRush(Server game)
         {
-            this._game = game;
+            _game = game;
         }
 
         public IMapNode NextDestination()
@@ -20,7 +20,7 @@ namespace vindiniumcore.Infrastructure.Behaviors.Tactics
                 return _game.GetClosestTavern();
             }
 
-            if ((hero.Life < 30) || (hero.Life < 90 && this._game.GetClosestTavern().MovementCost < 2))
+            if ((hero.Life < 30) || (hero.Life < 90 && _game.GetClosestTavern().MovementCost < 2))
             {
                 return _game.GetClosestTavern();
             }

@@ -1,9 +1,8 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using System.Linq;
-using vindiniumcore.Infrastructure.Behaviors.Extensions;
 using vindiniumcore.Infrastructure.Behaviors.Map;
 using vindiniumcore.Infrastructure.DTOs;
+using vindiniumcore.Infrastructure.Extensions;
 
 namespace vindiniumcore.Infrastructure.Behaviors.Movement
 {
@@ -14,11 +13,11 @@ namespace vindiniumcore.Infrastructure.Behaviors.Movement
     {
 		private readonly Server _server;
 
-	    private IMapNode Hero => this._server.MyHero;       
+	    private IMapNode Hero => _server.MyHero;       
 
         public ShortestPath(Server board)
         {
-            this._server = board;
+            _server = board;
             PopulateMovementCost();
         }
 
@@ -26,30 +25,23 @@ namespace vindiniumcore.Infrastructure.Behaviors.Movement
         public List<IMapNode> GetShortestCompleteRouteToLocation(CoOrdinates closestChest)
         {
             var result = new List<IMapNode>();
-            try
+            var node = _server.Board[closestChest.X][closestChest.Y];
+            int depth;
+            IMapNode target = node;
+            do
             {
-                var node = this._server.Board[closestChest.X][closestChest.Y];
-                int depth;
-                IMapNode target = node;
-                do
+                result.Add(target);
+                depth = target.MovementCost;
+                target =
+                    target.Parents.Where(n => n.Passable && n.MovementCost > 0).OrderBy(n => n.MovementCost).First();
+                // no route to anything protection.. just wait
+                if (result.Count > 100)
                 {
-                    result.Add(target);
-                    depth = target.MovementCost;
-                    target =
-                        target.Parents.Where(n => n.Passable && n.MovementCost > 0).OrderBy(n => n.MovementCost).First();
-                    // no route to anything protection.. just wait
-                    if (result.Count > 100)
-                    {
-                        return null;
-                    }
-                } while (depth > 1); // 0 is the Hero
-                result = result.OrderBy(n => n.MovementCost).ToList();
-            }
-            catch (Exception ex)
-            {
-                
-            }
-            
+                    return null;
+                }
+            } while (depth > 1); // 0 is the Hero
+            result = result.OrderBy(n => n.MovementCost).ToList();
+
             return result;
         }
         
@@ -57,10 +49,10 @@ namespace vindiniumcore.Infrastructure.Behaviors.Movement
         private void PopulateMovementCost()
 	    {
 	        int depth = 0;
-	        this.Hero.MovementCost = depth;
+	        Hero.MovementCost = depth;
 	        depth++;
 
-            foreach (var heroNode in this.Hero.Parents)
+            foreach (var heroNode in Hero.Parents)
 	        {
                 AssignCost(depth, heroNode);
 	            if (heroNode.Passable)

@@ -9,7 +9,7 @@ namespace vindiniumcore.Infrastructure.Mappings
         public HeroMapping()
         {
             CreateMap<Hero, HeroNode>()
-                .ConstructUsing(o => new HeroNode(this.GetTileType(o), o.pos.y, o.pos.x)
+                .ConstructUsing(o => new HeroNode(GetTileType(o), o.pos.y, o.pos.x)
                 {
                     Id = o.id,
                     Elo = o.elo,
@@ -23,7 +23,7 @@ namespace vindiniumcore.Infrastructure.Mappings
 
 
             CreateMap<Hero, VillianNode>()
-                .ConstructUsing(o => new VillianNode(this.GetTileType(o), o.pos.y, o.pos.x)
+                .ConstructUsing(o => new VillianNode(GetTileType(o), o.pos.y, o.pos.x)
                 {
                     Id = o.id,
                     Elo = o.elo,

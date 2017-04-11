@@ -1,5 +1,5 @@
-﻿using vindiniumcore.Infrastructure.Behaviors.Extensions;
-using vindiniumcore.Infrastructure.Behaviors.Map;
+﻿using vindiniumcore.Infrastructure.Behaviors.Map;
+using vindiniumcore.Infrastructure.Extensions;
 
 namespace vindiniumcore.Infrastructure.Behaviors.Tactics
 {
@@ -12,12 +12,12 @@ namespace vindiniumcore.Infrastructure.Behaviors.Tactics
 
         public DumbGoldRush(Server game)
         {
-            this._game = game;
+            _game = game;
         }
 
         public IMapNode NextDestination()
         {
-            return this._game.GetClosestChest();
+            return _game.GetClosestChest();
         }
     }
 }

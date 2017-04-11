@@ -1,9 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
-
-namespace vindiniumcore.Infrastructure.Services.ApiClient
+﻿namespace vindiniumcore.Infrastructure.Services.ApiClient
 {
     public class VindiniumClient : IVindiniumClient
     {
