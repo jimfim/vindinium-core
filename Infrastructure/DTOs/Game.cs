@@ -1,7 +1,7 @@
 ﻿using System.Collections.Generic;
 using System.Runtime.Serialization;
 
-namespace vindinium.Infrastructure.DTOs
+namespace vindiniumcore.Infrastructure.DTOs
 {
   [DataContract]
   class Game

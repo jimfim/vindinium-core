@@ -1,4 +1,4 @@
-﻿namespace vindinium.Infrastructure.Behaviors.Models
+﻿namespace vindiniumcore.Infrastructure.Behaviors.Map
 {
     public class CoOrdinates
     {

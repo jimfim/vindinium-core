@@ -1,20 +1,18 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using vindiniumcore.Infrastructure.Behaviors.Map;
+using vindiniumcore.Infrastructure.Behaviors.Movement;
+using vindiniumcore.Infrastructure.Behaviors.Tactics;
+using vindiniumcore.Infrastructure.DTOs;
 
-using vindinium.Infrastructure.Behaviors.Map;
-using vindinium.Infrastructure.Behaviors.Models;
-using vindinium.Infrastructure.Behaviors.Movement;
-using vindinium.Infrastructure.Behaviors.Tactics;
-using vindinium.Infrastructure.DTOs;
-
-namespace vindinium.Infrastructure.Bots
+namespace vindiniumcore.Infrastructure.Bots
 {
     public class Robot : IBot
     {
         private readonly Server _server;
         private ITactic _tactic;
-        private IMovement _movement;
+        private IPathFinding _pathFinding;
 
         public Robot(Server server)
         {
@@ -28,14 +26,12 @@ namespace vindinium.Infrastructure.Bots
         {
             while (this._server.Finished == false && this._server.Errored == false)
             {
-
-
                 _tactic = new SurvivalGoldRush(_server);
-                _movement = new ShortestPath(_server);
+                _pathFinding = new ShortestPath(_server);
 
                 var destination = _tactic.NextDestination();
 
-                var route = _movement.GetShortestCompleteRouteToLocation(destination.Location);
+                var route = _pathFinding.GetShortestCompleteRouteToLocation(destination.Location);
         
                 string direction = "Stay";
                 if (route != null)

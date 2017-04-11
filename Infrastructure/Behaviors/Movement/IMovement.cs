@@ -1,11 +1,9 @@
 ﻿using System.Collections.Generic;
+using vindiniumcore.Infrastructure.Behaviors.Map;
 
-using vindinium.Infrastructure.Behaviors.Map;
-using vindinium.Infrastructure.Behaviors.Models;
-
-namespace vindinium.Infrastructure.Behaviors.Movement
+namespace vindiniumcore.Infrastructure.Behaviors.Movement
 {
-	public interface IMovement
+	public interface IPathFinding
 	{
         List<IMapNode> GetShortestCompleteRouteToLocation(CoOrdinates closestChest);
     }

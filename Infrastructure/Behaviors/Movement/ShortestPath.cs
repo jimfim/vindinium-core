@@ -1,17 +1,16 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
-using vindinium.Infrastructure.Behaviors.Extensions;
-using vindinium.Infrastructure.Behaviors.Map;
-using vindinium.Infrastructure.Behaviors.Models;
-using vindinium.Infrastructure.DTOs;
+using vindiniumcore.Infrastructure.Behaviors.Extensions;
+using vindiniumcore.Infrastructure.Behaviors.Map;
+using vindiniumcore.Infrastructure.DTOs;
 
-namespace vindinium.Infrastructure.Behaviors.Movement
+namespace vindiniumcore.Infrastructure.Behaviors.Movement
 {
     /// <summary>
     /// A* search
     /// </summary>
-	public class ShortestPath : IMovement
+	public class ShortestPath : IPathFinding
     {
 		private readonly Server _server;
 

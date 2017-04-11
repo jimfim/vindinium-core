@@ -6,47 +6,23 @@ using System.Net.Http;
 using System.Runtime.Serialization.Json;
 using System.Text;
 using AutoMapper;
-using vindinium.Infrastructure.Behaviors.Map;
-using vindinium.Infrastructure.Behaviors.Models;
-using vindinium.Infrastructure.DTOs;
+using vindiniumcore.Infrastructure;
+using vindiniumcore.Infrastructure.Behaviors.Map;
+using vindiniumcore.Infrastructure.DTOs;
 
-
-namespace vindinium
+namespace vindiniumcore
 {
     public class Server
     {
-        private readonly string key;
-
-        private readonly string map;
-
-        private readonly IMapper mapper;
-
-        private readonly string serverUrl;
-
-        private readonly bool trainingMode;
-
-        private readonly uint turns;
-
-        private string playUrl;
-
-        public Server()
-        {
-        }
+        private readonly VindiniumSettings _vindiniumSettings;
+        private readonly IMapper _mapper;
+        public string PlayUrl { get; set; }
 
         //if training mode is false, turns and DefaultMapBuilder are ignored8
-        public Server(string key, bool trainingMode, uint turns, string serverURL, string map, IMapper mapper)
+        public Server(VindiniumSettings vindiniumSettings, IMapper mapper)
         {
-            this.key = key;
-            this.trainingMode = trainingMode;
-            serverUrl = serverURL;
-            this.mapper = mapper;
-
-            //the reaons im doing the if statement here is so that i dont have to do it later
-            if (trainingMode)
-            {
-                this.turns = turns;
-                this.map = map;
-            }
+            _vindiniumSettings = vindiniumSettings;
+            this._mapper = mapper;
         }
 
         public string ViewUrl { get; private set; }
@@ -76,23 +52,23 @@ namespace vindinium
 
             string uri;
 
-            if (trainingMode)
+            if (_vindiniumSettings.TrainingMode)
             {
-                uri = serverUrl + "/api/training";
+                uri = _vindiniumSettings.ServerUrl.AbsoluteUri + "/api/training";
             }
             else
             {
-                uri = serverUrl + "/api/arena";
+                uri = _vindiniumSettings.ServerUrl.AbsoluteUri + "/api/arena";
             }
 
-            var myParameters = "key=" + key;
-            if (trainingMode)
+            var myParameters = "key=" + _vindiniumSettings.Key;
+            if (_vindiniumSettings.TrainingMode)
             {
-                myParameters += "&turns=" + turns;
+                myParameters += "&turns=" + _vindiniumSettings.Turns;
             }
-            if (map != null)
+            if (_vindiniumSettings.Map!= null)
             {
-                myParameters += "&map=" + map;
+                myParameters += "&map=" + _vindiniumSettings.Map;
             }
 
             //make the request
@@ -102,7 +78,7 @@ namespace vindinium
                 //client.Headers[HttpRequestHeader.ContentType] = "application/X-www-form-urlencoded";
                 try
                 {
-                    var result = client.PostAsync(uri +"?"+ myParameters, new StringContent(string.Empty)).Result;
+                    var result = client.PostAsync(uri + "?"+ myParameters, new StringContent(string.Empty)).Result;
                     
                     Deserialize(result.Content.ReadAsStringAsync().Result);
                 }
@@ -146,17 +122,15 @@ namespace vindinium
 
         public void MoveHero(string direction)
         {
-            var myParameters = "key=" + key + "&dir=" + direction;
+            var myParameters = "key=" + _vindiniumSettings.Key + "&dir=" + direction;
 
             //make the request
             using (var client = new HttpClient())
             {
                 client.DefaultRequestHeaders.Add("ContentType", "application/X-www-form-urlencoded");
-                //client.Headers[HttpRequestHeader.ContentType] = "application/X-www-form-urlencoded";
-
                 try
                 {
-                    var result = client.PostAsync(playUrl +"?"+ myParameters,new StringContent(string.Empty)).Result;
+                    var result = client.PostAsync(PlayUrl + "?"+ myParameters,new StringContent(string.Empty)).Result;
 
                     Deserialize(result.Content.ReadAsStringAsync().Result);
                 }
@@ -266,11 +240,11 @@ namespace vindinium
             var ser = new DataContractJsonSerializer(typeof (GameResponse));
             var gameResponse = (GameResponse) ser.ReadObject(stream);
 
-            playUrl = gameResponse.playUrl;
+            PlayUrl = gameResponse.playUrl;
             ViewUrl = gameResponse.viewUrl;
 
-            MyHero = mapper.Map<HeroNode>(gameResponse.hero);
-            Villians = mapper.Map<List<VillianNode>>(gameResponse.game.heroes.Where(h => h.id != MyHero.Id));
+            MyHero = _mapper.Map<HeroNode>(gameResponse.hero);
+            Villians = _mapper.Map<List<VillianNode>>(gameResponse.game.heroes.Where(h => h.id != MyHero.Id));
             AllCharacters = new List<IMapNode>();
             AllCharacters.Add(MyHero);
             AllCharacters.AddRange(Villians);
@@ -284,8 +258,6 @@ namespace vindinium
 
             //VisualizeMap(this);
         }
-
-       
 
         private void PopulateNodeParents()
         {

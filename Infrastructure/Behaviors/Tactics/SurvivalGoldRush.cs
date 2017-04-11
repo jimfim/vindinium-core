@@ -1,7 +1,7 @@
-﻿using vindinium.Infrastructure.Behaviors.Extensions;
-using vindinium.Infrastructure.Behaviors.Map;
+﻿using vindiniumcore.Infrastructure.Behaviors.Extensions;
+using vindiniumcore.Infrastructure.Behaviors.Map;
 
-namespace vindinium.Infrastructure.Behaviors.Tactics
+namespace vindiniumcore.Infrastructure.Behaviors.Tactics
 {
     public class SurvivalGoldRush : ITactic
     {

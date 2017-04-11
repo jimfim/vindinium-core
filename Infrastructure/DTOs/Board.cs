@@ -1,6 +1,6 @@
 ﻿using System.Runtime.Serialization;
 
-namespace vindinium.Infrastructure.DTOs
+namespace vindiniumcore.Infrastructure.DTOs
 {
   [DataContract]
     class Board

@@ -1,7 +1,6 @@
-﻿using vindinium.Infrastructure.Behaviors.Map;
-using vindinium.Infrastructure.Behaviors.Models;
+﻿using vindiniumcore.Infrastructure.Behaviors.Map;
 
-namespace vindinium.Infrastructure.Behaviors.Tactics
+namespace vindiniumcore.Infrastructure.Behaviors.Tactics
 {
     public interface ITactic
     {

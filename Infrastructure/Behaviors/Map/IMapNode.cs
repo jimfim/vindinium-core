@@ -1,9 +1,7 @@
 ﻿using System.Collections.Generic;
+using vindiniumcore.Infrastructure.DTOs;
 
-using vindinium.Infrastructure.Behaviors.Models;
-using vindinium.Infrastructure.DTOs;
-
-namespace vindinium.Infrastructure.Behaviors.Map
+namespace vindiniumcore.Infrastructure.Behaviors.Map
 {
     public interface IMapNode
     {

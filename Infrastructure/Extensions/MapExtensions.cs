@@ -1,15 +1,9 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Dynamic;
+﻿using System.Collections.Generic;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+using vindiniumcore.Infrastructure.Behaviors.Map;
+using vindiniumcore.Infrastructure.DTOs;
 
-using vindinium.Infrastructure.Behaviors.Map;
-using vindinium.Infrastructure.Behaviors.Models;
-using vindinium.Infrastructure.DTOs;
-
-namespace vindinium.Infrastructure.Behaviors.Extensions
+namespace vindiniumcore.Infrastructure.Behaviors.Extensions
 {
     public static class MapExtensions
     {
