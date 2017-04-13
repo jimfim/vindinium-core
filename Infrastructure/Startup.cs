@@ -8,10 +8,12 @@ namespace vindiniumcore.Infrastructure
     class Startup : IStartable
     {
         private readonly Server _server;
+        private readonly ILifetimeScope _lifetimeScope;
 
-        public Startup(Server server)
+        public Startup(Server server,ILifetimeScope lifetimeScope)
         {
             _server = server;
+            _lifetimeScope = lifetimeScope;
         }
 
         public void Start()
@@ -23,9 +25,7 @@ namespace vindiniumcore.Infrastructure
                 Process.Start("cmd", "/C start " + _server.ViewUrl);
             }
 
-            var bot = new Robot(_server);
-            bot.Run();
-            Console.ReadLine();
+            _lifetimeScope.Resolve<IBot>().Run(_server);
         }
     }
 }

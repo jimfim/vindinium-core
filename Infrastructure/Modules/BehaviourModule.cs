@@ -7,6 +7,7 @@ namespace vindiniumcore.Infrastructure.Modules
     {
         protected override void Load(ContainerBuilder builder)
         {
+            builder.RegisterType<SurvivalGoldRush>().As<ITactic>();
             builder.RegisterType<DumbGoldRush>().Keyed<ITactic>(Tactics.DumbGoldRush);
             builder.RegisterType<SurvivalGoldRush>().Keyed<ITactic>(Tactics.SurvivalGoldRush);
 

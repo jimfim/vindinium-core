@@ -8,6 +8,7 @@ using System.Text;
 using AutoMapper;
 using vindiniumcore.Infrastructure.Behaviors.Map;
 using vindiniumcore.Infrastructure.DTOs;
+using vindiniumcore.Infrastructure.Extensions;
 
 namespace vindiniumcore.Infrastructure
 {
@@ -165,19 +166,10 @@ namespace vindiniumcore.Infrastructure
                 switch (charData[i])
                 {
                     case '#':
-                        Board[x][y] = new MapNode(Tile.IMPASSABLE_WOOD, x, y)
-                        {
-                            Id = i,
-                            Passable = false
-                        };
+                        Board[x][y] = new MapNode(Tile.IMPASSABLE_WOOD, x, y);
                         break;
                     case ' ':
-                        Board[x][y] = new MapNode(Tile.FREE, x, y)
-                        {
-                            Id = i,
-                            Passable = true,
-                            Type = Tile.FREE
-                        };
+                        Board[x][y] = new MapNode(Tile.FREE, x, y);
                         break;
                     case '@':
                         switch (charData[i + 1])
@@ -198,6 +190,7 @@ namespace vindiniumcore.Infrastructure
                         break;
                     case '[':
                         Board[x][y] = new MapNode(Tile.TAVERN, x, y);
+
                         break;
                     case '$':
                         switch (charData[i + 1])
@@ -253,10 +246,62 @@ namespace vindiniumcore.Infrastructure
 
             CreateBoard(gameResponse.game.board.size, gameResponse.game.board.tiles);
             PopulateNodeParents();
-
-            //VisualizeMap(this);
+            PopulateMovementCost();
         }
 
+        private void PopulateMovementCost()
+        {
+            int depth = 0;
+            MyHero.MovementCost = depth;
+            depth++;
+
+            foreach (var heroNode in MyHero.Parents)
+            {
+                AssignCost(depth, heroNode);
+                if (heroNode.Passable)
+                {
+                    FindAllRoutes(depth, heroNode);
+                }
+            }
+        }
+
+        private void FindAllRoutes(int depth, IMapNode parentMapNode)
+        {
+            depth++;
+            foreach (var node in parentMapNode.Parents.Where(n => n.MovementCost > depth))
+            {
+                AssignCost(depth, node);
+                if (node.Passable)
+                {
+                    FindAllRoutes(depth, node);
+                }
+            }
+        }
+        private void AssignCost(int cost, IMapNode mapNode)
+        {
+            if (cost < mapNode.MovementCost)
+            {
+                if (mapNode.Type == Tile.IMPASSABLE_WOOD || mapNode.Type == this.MyTreasure())
+                {
+                    mapNode.Passable = false;
+                    mapNode.MovementCost = -1;
+                }
+                else if (this.NotMyTreasure().Contains(mapNode.Type) ||
+                         mapNode.Type == Tile.HERO_1 ||
+                         mapNode.Type == Tile.HERO_2 ||
+                         mapNode.Type == Tile.HERO_3 ||
+                         mapNode.Type == Tile.HERO_4)
+                {
+                    mapNode.MovementCost = cost;
+                    mapNode.Passable = false;
+                }
+                else
+                {
+                    mapNode.MovementCost = cost;
+                    mapNode.Passable = true;
+                }
+            }
+        }
         private void PopulateNodeParents()
         {
             foreach (IMapNode[] t in Board)

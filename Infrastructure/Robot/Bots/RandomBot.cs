@@ -8,29 +8,10 @@ namespace vindiniumcore.Infrastructure.Bots
     {
 		public string BotName => "RandomBot";
 
-        private readonly Server server;
-
-        public RandomBot(Server server)
-        {
-            this.server = server;
-        }
-
         //starts everything
-        public void Run()
+        public void Run(Server server)
         {
             Console.Out.WriteLine("random bot running");
-
-            server.CreateGame();
-
-            if (server.Errored == false)
-            {
-                //opens up a webpage so you can view the game, doing it async so we dont time out
-                new Thread(delegate()
-                {
-                    System.Diagnostics.Process.Start(server.ViewUrl);
-                }).Start();
-            }
-            
             Random random = new Random();
             while (server.Finished == false && server.Errored == false)
             {

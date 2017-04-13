@@ -7,6 +7,7 @@ namespace vindiniumcore.Infrastructure.Modules
     {
         protected override void Load(ContainerBuilder builder)
         {
+            builder.RegisterType<ShortestPath>().As<IPathFinding>();
             builder.RegisterType<ShortestPath>().Keyed<IPathFinding>(PathFindingStrategies.AStar);
             
             base.Load(builder);

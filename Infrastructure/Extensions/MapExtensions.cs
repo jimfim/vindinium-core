@@ -99,7 +99,7 @@ namespace vindiniumcore.Infrastructure.Extensions
             {
                 foreach (IMapNode[] t in server.Board)
                 {
-                    viableTargets.AddRange(from tile in tileset where t[y].Type == tile select t[y]);
+                    viableTargets.AddRange(tileset.Where(tile => t[y].Type == tile).Select(tile => t[y]));
                 }
             }
             return viableTargets;

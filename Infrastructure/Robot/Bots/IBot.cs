@@ -4,6 +4,6 @@ namespace vindiniumcore.Infrastructure.Bots
 	{
 		string BotName { get; }
 
-		void Run();
+		void Run(Server server);
 	}
 }

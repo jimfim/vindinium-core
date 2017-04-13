@@ -8,60 +8,55 @@ using vindiniumcore.Infrastructure.DTOs;
 
 namespace vindiniumcore.Infrastructure.Bots
 {
-    public class Robot : IBot
+    public class LoggingRobot : IBot
     {
-        private readonly Server _server;
-        private ITactic _tactic;
-        private IPathFinding _pathFinding;
+        private readonly IPathFinding _pathFinding;
+        private readonly ITactic _tactic;
 
-        public Robot(Server server)
+        public LoggingRobot(ITactic tactic,IPathFinding pathFinding)
         {
-            _server = server; 
+            _tactic = tactic;
+            _pathFinding = pathFinding;
         }
 
         public string BotName => "Robot";
 
         //starts everything
-        public void Run()
+        public void Run(Server server)
         {
-            while (_server.Finished == false && _server.Errored == false)
+            while (server.Finished == false && server.Errored == false)
             {
-                _tactic = new SurvivalGoldRush(_server);
-                _pathFinding = new ShortestPath(_server);
-
                 var destination = _tactic.NextDestination();
-
                 var route = _pathFinding.GetShortestCompleteRouteToLocation(destination.Location);
-        
                 string direction = "Stay";
                 if (route != null)
                 {
                     
-                    direction = _server.GetDirection(_server.MyHero.Location, route.Any() ? route.First().Location : null);
+                    direction = server.GetDirection(server.MyHero.Location, route.Any() ? route.First().Location : null);
                 }
                 
-
-                _server.MoveHero(direction);
+                server.MoveHero(direction);
                 Console.Clear();
-                VisualizeMap(_server, route);
+
+                VisualizeMap(server, route);
                 Console.Out.WriteLine("=========================================");
                 Console.Out.WriteLine("Target Location : {0},{1}", destination.Location.X, destination.Location.Y);
                 Console.Out.WriteLine("Target Cost \t: {0}", destination.MovementCost);
                 Console.Out.WriteLine("Target Type \t: {0}", destination.Type);
                 Console.Out.WriteLine("=========================================");
-                Console.Out.WriteLine("Hero Location \t: {0},{1}", _server.MyHero.Location.X,_server.MyHero.Location.Y);
-                Console.Out.WriteLine("Hero Life \t: {0}", (_server.MyHero as HeroNode).Life);
-                Console.Out.WriteLine("Hero Gold \t: {0}", (_server.MyHero as HeroNode).Gold);
-                Console.Out.WriteLine("Hero Mines \t: {0}", (_server.MyHero as HeroNode).MineCount);
+                Console.Out.WriteLine("Hero Location \t: {0},{1}", server.MyHero.Location.X, server.MyHero.Location.Y);
+                Console.Out.WriteLine("Hero Life \t: {0}", (server.MyHero as HeroNode).Life);
+                Console.Out.WriteLine("Hero Gold \t: {0}", (server.MyHero as HeroNode).Gold);
+                Console.Out.WriteLine("Hero Mines \t: {0}", (server.MyHero as HeroNode).MineCount);
                 Console.Out.WriteLine("Hero Moving \t: {0}", direction);
                 Console.Out.WriteLine("=========================================");
-                Console.Out.WriteLine("Completed Turn " + _server.CurrentTurn);
-                      
+                Console.Out.WriteLine("Completed Turn " + server.CurrentTurn);
+
             }
 
-            if (_server.Errored)
+            if (server.Errored)
             {
-                Console.Out.WriteLine("error: " + _server.ErrorText);
+                Console.Out.WriteLine("error: " + server.ErrorText);
             }
             Console.Out.WriteLine("{0} Finished", BotName);
         }
