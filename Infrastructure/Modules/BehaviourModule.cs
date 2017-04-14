@@ -1,5 +1,5 @@
 ﻿using Autofac;
-using vindiniumcore.Infrastructure.Behaviors.Tactics;
+using vindiniumcore.Infrastructure.Robot.Tactics;
 
 namespace vindiniumcore.Infrastructure.Modules
 {
@@ -7,9 +7,9 @@ namespace vindiniumcore.Infrastructure.Modules
     {
         protected override void Load(ContainerBuilder builder)
         {
-            builder.RegisterType<SurvivalGoldRush>().As<ITactic>();
+            builder.RegisterType<GoldRush>().As<ITactic>();
             builder.RegisterType<DumbGoldRush>().Keyed<ITactic>(Tactics.DumbGoldRush);
-            builder.RegisterType<SurvivalGoldRush>().Keyed<ITactic>(Tactics.SurvivalGoldRush);
+            builder.RegisterType<GoldRush>().Keyed<ITactic>(Tactics.SurvivalGoldRush);
 
             base.Load(builder);
         }

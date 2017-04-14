@@ -1,12 +1,12 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
-using vindiniumcore.Infrastructure.Behaviors.Map;
-using vindiniumcore.Infrastructure.Behaviors.Movement;
-using vindiniumcore.Infrastructure.Behaviors.Tactics;
 using vindiniumcore.Infrastructure.DTOs;
+using vindiniumcore.Infrastructure.Map;
+using vindiniumcore.Infrastructure.Robot.Movement;
+using vindiniumcore.Infrastructure.Robot.Tactics;
 
-namespace vindiniumcore.Infrastructure.Bots
+namespace vindiniumcore.Infrastructure.Robot.Bots
 {
     public class LoggingRobot : IBot
     {

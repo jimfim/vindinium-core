@@ -1,11 +1,8 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using vindiniumcore.Infrastructure.Behaviors.Movement;
-using vindiniumcore.Infrastructure.Behaviors.Tactics;
+﻿using System.Linq;
+using vindiniumcore.Infrastructure.Robot.Movement;
+using vindiniumcore.Infrastructure.Robot.Tactics;
 
-namespace vindiniumcore.Infrastructure.Bots
+namespace vindiniumcore.Infrastructure.Robot.Bots
 {
     class FighterBot : IBot
     {

@@ -1,7 +1,7 @@
 ﻿using System.Collections.Generic;
 using vindiniumcore.Infrastructure.DTOs;
 
-namespace vindiniumcore.Infrastructure.Behaviors.Map
+namespace vindiniumcore.Infrastructure.Map
 {
     public interface IMapNode
     {

@@ -1,4 +1,4 @@
-namespace vindiniumcore.Infrastructure.Bots
+namespace vindiniumcore.Infrastructure.Robot.Bots
 {
 	internal interface IBot
 	{

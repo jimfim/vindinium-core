@@ -1,7 +1,7 @@
-﻿using vindiniumcore.Infrastructure.Behaviors.Map;
-using vindiniumcore.Infrastructure.Extensions;
+﻿using vindiniumcore.Infrastructure.Extensions;
+using vindiniumcore.Infrastructure.Map;
 
-namespace vindiniumcore.Infrastructure.Behaviors.Tactics
+namespace vindiniumcore.Infrastructure.Robot.Tactics
 {
     /// <summary>
     /// Charges for closest un-owned goldmine

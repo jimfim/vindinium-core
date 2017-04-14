@@ -1,7 +1,7 @@
 ﻿using System.Collections.Generic;
 using System.Linq;
-using vindiniumcore.Infrastructure.Behaviors.Map;
 using vindiniumcore.Infrastructure.DTOs;
+using vindiniumcore.Infrastructure.Map;
 
 namespace vindiniumcore.Infrastructure.Extensions
 {

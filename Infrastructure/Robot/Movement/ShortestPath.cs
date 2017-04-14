@@ -1,10 +1,8 @@
 ﻿using System.Collections.Generic;
 using System.Linq;
-using vindiniumcore.Infrastructure.Behaviors.Map;
-using vindiniumcore.Infrastructure.DTOs;
-using vindiniumcore.Infrastructure.Extensions;
+using vindiniumcore.Infrastructure.Map;
 
-namespace vindiniumcore.Infrastructure.Behaviors.Movement
+namespace vindiniumcore.Infrastructure.Robot.Movement
 {
     /// <summary>
     /// A* search
@@ -25,10 +23,10 @@ namespace vindiniumcore.Infrastructure.Behaviors.Movement
         {
             var result = new List<IMapNode>();
             var node = _server.Board[closestChest.X][closestChest.Y];
-            int depth;
             IMapNode target = node;
             try
             {
+                int depth;
                 do
                 {
                     result.Add(target);

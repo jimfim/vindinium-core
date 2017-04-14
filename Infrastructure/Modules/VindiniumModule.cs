@@ -1,6 +1,5 @@
 ﻿using Autofac;
-using vindiniumcore.Infrastructure.Behaviors.Tactics;
-using vindiniumcore.Infrastructure.Bots;
+using vindiniumcore.Infrastructure.Robot.Bots;
 using vindiniumcore.Infrastructure.Services.ApiClient;
 
 namespace vindiniumcore.Infrastructure.Modules

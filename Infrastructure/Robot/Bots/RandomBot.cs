@@ -1,8 +1,7 @@
 ﻿using System;
-using System.Threading;
 using vindiniumcore.Infrastructure.DTOs;
 
-namespace vindiniumcore.Infrastructure.Bots
+namespace vindiniumcore.Infrastructure.Robot.Bots
 {
     class RandomBot : IBot
     {

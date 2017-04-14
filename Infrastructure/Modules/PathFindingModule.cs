@@ -1,5 +1,5 @@
 ﻿using Autofac;
-using vindiniumcore.Infrastructure.Behaviors.Movement;
+using vindiniumcore.Infrastructure.Robot.Movement;
 
 namespace vindiniumcore.Infrastructure.Modules
 {
@@ -8,7 +8,7 @@ namespace vindiniumcore.Infrastructure.Modules
         protected override void Load(ContainerBuilder builder)
         {
             builder.RegisterType<ShortestPath>().As<IPathFinding>();
-            builder.RegisterType<ShortestPath>().Keyed<IPathFinding>(PathFindingStrategies.AStar);
+            builder.RegisterType<ShortestPath>().Keyed<IPathFinding>(PathFindingStrategies.ShortestPath);
             
             base.Load(builder);
         }

@@ -1,6 +1,6 @@
-﻿using vindiniumcore.Infrastructure.Behaviors.Map;
+﻿using vindiniumcore.Infrastructure.Map;
 
-namespace vindiniumcore.Infrastructure.Behaviors.Tactics
+namespace vindiniumcore.Infrastructure.Robot.Tactics
 {
     public interface ITactic
     {

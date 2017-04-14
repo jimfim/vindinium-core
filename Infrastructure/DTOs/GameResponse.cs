@@ -3,7 +3,7 @@ using System.Runtime.Serialization;
 namespace vindiniumcore.Infrastructure.DTOs
 {
   [DataContract]
-  class GameResponse
+  public class GameResponse
   {
     [DataMember]
     internal Game game;

@@ -1,7 +1,7 @@
 ﻿using System.Collections.Generic;
-using vindiniumcore.Infrastructure.Behaviors.Map;
+using vindiniumcore.Infrastructure.Map;
 
-namespace vindiniumcore.Infrastructure.Behaviors.Movement
+namespace vindiniumcore.Infrastructure.Robot.Movement
 {
 	public interface IPathFinding
 	{

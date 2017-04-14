@@ -1,6 +1,6 @@
 ﻿using AutoMapper;
-using vindiniumcore.Infrastructure.Behaviors.Map;
 using vindiniumcore.Infrastructure.DTOs;
+using vindiniumcore.Infrastructure.Map;
 
 namespace vindiniumcore.Infrastructure.Mappings
 {

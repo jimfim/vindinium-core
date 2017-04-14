@@ -6,9 +6,9 @@ using System.Net.Http;
 using System.Runtime.Serialization.Json;
 using System.Text;
 using AutoMapper;
-using vindiniumcore.Infrastructure.Behaviors.Map;
 using vindiniumcore.Infrastructure.DTOs;
 using vindiniumcore.Infrastructure.Extensions;
+using vindiniumcore.Infrastructure.Map;
 
 namespace vindiniumcore.Infrastructure
 {

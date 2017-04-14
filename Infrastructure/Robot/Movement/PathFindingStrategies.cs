@@ -1,7 +1,8 @@
-﻿namespace vindiniumcore.Infrastructure.Behaviors.Movement
+﻿namespace vindiniumcore.Infrastructure.Robot.Movement
 {
     public enum PathFindingStrategies
     {
-        AStar = 0
+        ShortestPath = 0,
+        ShortestPathCostMap = 1
     }
 }

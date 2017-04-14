@@ -1,4 +1,4 @@
-﻿namespace vindiniumcore.Infrastructure.Behaviors.Tactics
+﻿namespace vindiniumcore.Infrastructure.Robot.Tactics
 {
     public enum Tactics
     {

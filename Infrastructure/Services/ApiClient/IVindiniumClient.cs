@@ -1,9 +1,11 @@
-﻿namespace vindiniumcore.Infrastructure.Services.ApiClient
+﻿using System.Threading.Tasks;
+
+namespace vindiniumcore.Infrastructure.Services.ApiClient
 {
     public interface IVindiniumClient
     {
-        bool MoveHero(string direction);
+        Task<GameDetails> MoveHero(string direction);
 
-        bool CreateGame();
+        Task<GameDetails> CreateGame();
     }
 }
