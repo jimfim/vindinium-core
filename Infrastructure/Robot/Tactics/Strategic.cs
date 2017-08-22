@@ -1,17 +1,16 @@
-﻿using vindiniumcore.Infrastructure.Extensions;
-using vindiniumcore.Infrastructure.Map;
+﻿using vindiniumcore.Infrastructure.Map;
+using vindiniumcore.Infrastructure.Services;
 
 namespace vindiniumcore.Infrastructure.Robot.Tactics
 {
     public class GoldRush : ITactic
     {
-        private readonly Server _game;
+        private readonly IGameService _gameService;
 
-        public GoldRush(Server game)
+        public GoldRush(IGameService gameService)
         {
-            _game = game;
+            _gameService = gameService;
         }
-
         public IMapNode NextDestination()
         {
 
@@ -31,18 +30,20 @@ namespace vindiniumcore.Infrastructure.Robot.Tactics
             ////b.goToTavern,               // Go to the nearest tavern
             ////b.maybeSuicide,             // Can't do anything. Suicide if we don't have too many mines.
             ////b.bumRush,                  // Can't even suicide. Bum Rush the closest enemy.
-            var hero = _game.MyHero as HeroNode;
-            if (hero == null || _game.GetClosestChest() == null)
+
+            var game = _gameService.GetGame();
+            var hero = game.MyHero as HeroNode;
+            if (hero == null || game.GetClosestChest() == null)
             {
-                return _game.GetClosestTavern();
+                return game.GetClosestTavern();
             }
 
-            if ((hero.Life < 30) || (hero.Life < 90 && _game.GetClosestTavern().MovementCost < 2))
+            if ((hero.Life < 30) || (hero.Life < 90 && game.GetClosestTavern().MovementCost < 2))
             {
-                return _game.GetClosestTavern();
+                return game.GetClosestTavern();
             }
 
-            return _game.GetClosestChest();
+            return game.GetClosestChest();
         }
     }
 }

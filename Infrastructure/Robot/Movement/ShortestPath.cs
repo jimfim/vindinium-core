@@ -1,6 +1,7 @@
 ﻿using System.Collections.Generic;
 using System.Linq;
 using vindiniumcore.Infrastructure.Map;
+using vindiniumcore.Infrastructure.Services;
 
 namespace vindiniumcore.Infrastructure.Robot.Movement
 {
@@ -9,20 +10,19 @@ namespace vindiniumcore.Infrastructure.Robot.Movement
     /// </summary>
 	public class ShortestPath : IPathFinding
     {
-		private readonly Server _server;
+        private readonly IGameService _gameService;
 
-	    private IMapNode Hero => _server.MyHero;       
-
-        public ShortestPath(Server server)
+        public ShortestPath(IGameService gameService)
         {
-            _server = server;
+            _gameService = gameService;
         }
 
 
         public List<IMapNode> GetShortestCompleteRouteToLocation(CoOrdinates closestChest)
         {
+            var game = _gameService.GetGame();
             var result = new List<IMapNode>();
-            var node = _server.Board[closestChest.X][closestChest.Y];
+            var node = game.Board[closestChest.X][closestChest.Y];
             IMapNode target = node;
             try
             {
@@ -51,9 +51,5 @@ namespace vindiniumcore.Infrastructure.Robot.Movement
 
             return result;
         }
-        
-
-
-	    
 	}
 }

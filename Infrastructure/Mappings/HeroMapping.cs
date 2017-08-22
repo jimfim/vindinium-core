@@ -20,20 +20,6 @@ namespace vindiniumcore.Infrastructure.Mappings
                     MineCount = o.mineCount
                 })
                 .ForAllMembers(o => o.Ignore());
-
-
-            CreateMap<Hero, VillianNode>()
-                .ConstructUsing(o => new VillianNode(GetTileType(o), o.pos.y, o.pos.x)
-                {
-                    Id = o.id,
-                    Elo = o.elo,
-                    Gold = o.gold,
-                    Life = o.life,
-                    Passable = false,
-                    Crashed = o.crashed,
-                    MineCount = o.mineCount
-                })
-                .ForAllMembers(o => o.Ignore());
         }
 
         private Tile GetTileType(Hero hero)

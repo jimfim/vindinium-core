@@ -26,15 +26,6 @@ namespace vindiniumcore.Infrastructure.Modules
             RegisterProfiles(builder);
             RegisterTypeConverters(builder);
             RegisterValueResolvers(builder);
-
-            //builder.Register(ctxt =>
-            //{
-            //    var scope = ctxt.Resolve<ILifetimeScope>();
-            //    return ctxt.Resolve<MapperConfiguration>().CreateMapper(scope.Resolve);
-            //});
-
-            //register your mapper
-            //builder.Register(c => c.Resolve<MapperConfiguration>().CreateMapper(c.Resolve)).As<IMapper>().InstancePerLifetimeScope();
         }
 
         private void RegisterProfiles(ContainerBuilder builder)

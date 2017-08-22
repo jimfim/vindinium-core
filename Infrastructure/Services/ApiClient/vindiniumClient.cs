@@ -1,6 +1,5 @@
 ﻿using System;
 using System.Net.Http;
-using System.Threading.Tasks;
 using AutoMapper;
 using Newtonsoft.Json;
 using vindiniumcore.Infrastructure.DTOs;
@@ -11,23 +10,24 @@ namespace vindiniumcore.Infrastructure.Services.ApiClient
     {
         private readonly VindiniumSettings _vindiniumSettings;
         private readonly IMapper _mapper;
+        private readonly IGameService _gameService;
         private readonly HttpClient _client;
 
-        public VindiniumClient(VindiniumSettings vindiniumSettings, IMapper mapper)
+        public VindiniumClient(VindiniumSettings vindiniumSettings, IMapper mapper, IGameService gameService)
         {
             _vindiniumSettings = vindiniumSettings;
             _mapper = mapper;
+            _gameService = gameService;
             _client = new HttpClient();
         }
 
-        public async Task<GameDetails> MoveHero(string direction)
+        public async void MoveHero(string direction)
         {
             var myParameters = "key=" + _vindiniumSettings.Key + "&dir=" + direction;
            // var result = await _client.PostAsync(_vindiniumSettings.ServerUrl + "?" + myParameters, new StringContent(string.Empty)).ContinueWith(DeserializeResponse);
-            return null;
         }
 
-        public async Task<GameDetails> CreateGame()
+        public async void CreateGame()
         {
             string uri = string.Empty;
             if (_vindiniumSettings.TrainingMode)
@@ -51,22 +51,19 @@ namespace vindiniumcore.Infrastructure.Services.ApiClient
             try
             {
                 var response =  _client.PostAsync(uri + "?" + myParameters, new StringContent(string.Empty)).Result;
-                return DeserializeResponse(response);
+                DeserializeResponse(response);
             }
             catch (Exception ex)
             {
                 throw ex;
             }
-
-            return null;
         }
 
-        private GameDetails DeserializeResponse(HttpResponseMessage x)
+        private void DeserializeResponse(HttpResponseMessage x)
         {
             var apiResponse = x.Content.ReadAsStringAsync();
             var response = JsonConvert.DeserializeObject<GameResponse>(apiResponse.Result);
-            var test = _mapper.Map<GameDetails>(response);
-            return test;
+            _gameService.UpdateGame(_mapper.Map<GameDetails>(response));
         }
     }
 }

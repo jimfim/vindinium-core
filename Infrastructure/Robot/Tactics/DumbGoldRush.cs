@@ -1,5 +1,5 @@
-﻿using vindiniumcore.Infrastructure.Extensions;
-using vindiniumcore.Infrastructure.Map;
+﻿using vindiniumcore.Infrastructure.Map;
+using vindiniumcore.Infrastructure.Services;
 
 namespace vindiniumcore.Infrastructure.Robot.Tactics
 {
@@ -8,16 +8,15 @@ namespace vindiniumcore.Infrastructure.Robot.Tactics
     /// </summary>
     public class DumbGoldRush : ITactic
     {
-        private readonly Server _game;
+        private readonly IGameService _gameService;
 
-        public DumbGoldRush(Server game)
+        public DumbGoldRush(IGameService gameService)
         {
-            _game = game;
+            _gameService = gameService;
         }
-
         public IMapNode NextDestination()
         {
-            return _game.GetClosestChest();
+            return _gameService.GetGame().GetClosestChest();
         }
     }
 }

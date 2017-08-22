@@ -1,9 +1,9 @@
 namespace vindiniumcore.Infrastructure.Robot.Bots
 {
-	internal interface IBot
+	public interface IBot
 	{
 		string BotName { get; }
 
-		void Run(GameDetails gameDetails);
+		void Run();
 	}
 }

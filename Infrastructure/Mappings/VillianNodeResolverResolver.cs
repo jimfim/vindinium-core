@@ -6,7 +6,7 @@ using vindiniumcore.Infrastructure.Map;
 
 namespace vindiniumcore.Infrastructure.Mappings
 {
-    public class VillianNodeResolverResolver : IValueResolver<GameResponse, GameDetails, IEnumerable<IMapNode>>
+    public class VillianNodeResolverResolver : IValueResolver<GameResponse, GameDetails, IEnumerable<HeroNode>>
     {
         private readonly IMapper _mapper;
 
@@ -14,11 +14,10 @@ namespace vindiniumcore.Infrastructure.Mappings
         {
             _mapper = mapper;
         }
-        public IEnumerable<IMapNode> Resolve(GameResponse source, GameDetails destination, IEnumerable<IMapNode> destMember, ResolutionContext context)
+        public IEnumerable<HeroNode> Resolve(GameResponse source, GameDetails destination, IEnumerable<HeroNode> destMember, ResolutionContext context)
         {
-            IEnumerable<Hero> test = source.game.heroes.Where(h => h.id != source.hero.id);
-            var narf = _mapper.Map<IEnumerable<VillianNode>>(test);
-            return narf;
+            IEnumerable<Hero> heroes = source.game.heroes.Where(h => h.id != source.hero.id);
+            return _mapper.Map<IEnumerable<HeroNode>>(heroes);
         }
     }
 }

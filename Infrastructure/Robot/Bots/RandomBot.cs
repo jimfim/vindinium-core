@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Threading.Tasks;
 using vindiniumcore.Infrastructure.DTOs;
 
 namespace vindiniumcore.Infrastructure.Robot.Bots
@@ -11,10 +12,11 @@ namespace vindiniumcore.Infrastructure.Robot.Bots
         {
             _server = server;
         }
+
 		public string BotName => "RandomBot";
 
         //starts everything
-        public void Run(GameDetails gameDetails)
+        public Task Run()
         {
             Console.Out.WriteLine("random bot running");
             Random random = new Random();
@@ -49,7 +51,5 @@ namespace vindiniumcore.Infrastructure.Robot.Bots
 
             Console.Out.WriteLine("random bot Finished");
         }
-
-
     }
 }

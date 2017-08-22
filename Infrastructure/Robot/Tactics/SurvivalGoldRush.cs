@@ -1,31 +1,33 @@
 ﻿using vindiniumcore.Infrastructure.Extensions;
 using vindiniumcore.Infrastructure.Map;
+using vindiniumcore.Infrastructure.Services;
 
 namespace vindiniumcore.Infrastructure.Robot.Tactics
 {
     public class Strategic : ITactic
     {
-        private readonly Server _game;
+        private readonly IGameService _gameService;
 
-        public Strategic(Server game)
+        public Strategic(IGameService gameService)
         {
-            _game = game;
+            _gameService = gameService;
         }
 
         public IMapNode NextDestination()
         {
-            var hero = _game.MyHero as HeroNode;
-            if (hero == null || _game.GetClosestChest() == null)
+            var game = _gameService.GetGame();
+            var hero = game.MyHero as HeroNode;
+            if (hero == null || game.GetClosestChest() == null)
             {
-                return _game.GetClosestTavern();
+                return game.GetClosestTavern();
             }
 
-            if ((hero.Life < 30) || (hero.Life < 90 && _game.GetClosestTavern().MovementCost < 2))
+            if ((hero.Life < 30) || (hero.Life < 90 && game.GetClosestTavern().MovementCost < 2))
             {
-                return _game.GetClosestTavern();
+                return game.GetClosestTavern();
             }
 
-            return _game.GetClosestChest();
+            return game.GetClosestChest();
         }
     }
 }
