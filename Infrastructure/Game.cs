@@ -1,8 +1,12 @@
 ﻿using System.Collections.Generic;
 using vindiniumcore.Infrastructure.Map;
+using vindiniumcore.Infrastructure.Mappings;
 
 namespace vindiniumcore.Infrastructure
 {
+    /// <summary>
+    /// <see cref="GameResponseMapping"/>
+    /// </summary>
     public class GameDetails
     {
         public IMapNode MyHero { get; set; }

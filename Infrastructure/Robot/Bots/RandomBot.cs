@@ -5,40 +5,46 @@ namespace vindiniumcore.Infrastructure.Robot.Bots
 {
     class RandomBot : IBot
     {
+        private readonly Server _server;
+
+        public RandomBot(Server server)
+        {
+            _server = server;
+        }
 		public string BotName => "RandomBot";
 
         //starts everything
-        public void Run(Server server)
+        public void Run(GameDetails gameDetails)
         {
             Console.Out.WriteLine("random bot running");
             Random random = new Random();
-            while (server.Finished == false && server.Errored == false)
+            while (_server.Finished == false && _server.Errored == false)
             {
                 switch(random.Next(0, 6))
                 {
                     case 0:
-                        server.MoveHero(Direction.East);
+                        _server.MoveHero(Direction.East);
                         break;
                     case 1:
-                        server.MoveHero(Direction.North);
+                        _server.MoveHero(Direction.North);
                         break;
                     case 2:
-                        server.MoveHero(Direction.South);
+                        _server.MoveHero(Direction.South);
                         break;
                     case 3:
-                        server.MoveHero(Direction.Stay);
+                        _server.MoveHero(Direction.Stay);
                         break;
                     case 4:
-                        server.MoveHero(Direction.West);
+                        _server.MoveHero(Direction.West);
                         break;
                 }
 
-                Console.Out.WriteLine("completed turn " + server.CurrentTurn);
+                Console.Out.WriteLine("completed turn " + _server.CurrentTurn);
             }
 
-            if (server.Errored)
+            if (_server.Errored)
             {
-                Console.Out.WriteLine("error: " + server.ErrorText);
+                Console.Out.WriteLine("error: " + _server.ErrorText);
             }
 
             Console.Out.WriteLine("random bot Finished");

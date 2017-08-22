@@ -8,17 +8,19 @@ namespace vindiniumcore.Infrastructure.Robot.Bots
     {
         private readonly ITactic _tactic;
         private readonly IPathFinding _pathFinding;
+        private readonly Server _server;
         public string BotName => "Thunder Budddy";
 
-        public FighterBot(ITactic tactic, IPathFinding pathFinding)
+        public FighterBot(ITactic tactic, IPathFinding pathFinding, Server server)
         {
             _tactic = tactic;
             _pathFinding = pathFinding;
+            _server = server;
         }
 
-        public void Run(Server server)
+        public void Run(GameDetails gameDetails)
         {
-            while (server.Finished == false && server.Errored == false)
+            while (_server.Finished == false && _server.Errored == false)
             {
                 var destination = _tactic.NextDestination();
                 var route = _pathFinding.GetShortestCompleteRouteToLocation(destination.Location);
@@ -27,11 +29,11 @@ namespace vindiniumcore.Infrastructure.Robot.Bots
                 if (route != null)
                 {
 
-                    direction = server.GetDirection(server.MyHero.Location,
+                    direction = _server.GetDirection(_server.MyHero.Location,
                         route.Any() ? route.First().Location : null);
                 }
 
-                server.MoveHero(direction);
+                _server.MoveHero(direction);
             }
         }
     }

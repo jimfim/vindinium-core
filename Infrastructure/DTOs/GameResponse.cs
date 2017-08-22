@@ -6,18 +6,18 @@ namespace vindiniumcore.Infrastructure.DTOs
   public class GameResponse
   {
     [DataMember]
-    internal Game game;
+    public Game game;
 
     [DataMember]
-    internal Hero hero;
+    public Hero hero;
 
     [DataMember]
-    internal string token;
+    public string token;
 
     [DataMember]
-    internal string viewUrl;
+    public string viewUrl;
 
     [DataMember]
-    internal string playUrl;
+    public string playUrl;
   }
 }

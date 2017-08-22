@@ -14,7 +14,6 @@ namespace vindiniumcore
         {
             var builder = new ContainerBuilder();
             builder.RegisterAssemblyModules(Assembly.GetEntryAssembly());
-
             builder.Build();
         }
     }

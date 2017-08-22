@@ -3,12 +3,12 @@
 namespace vindiniumcore.Infrastructure.DTOs
 {
   [DataContract]
-    class Board
+    public class Board
     {
         [DataMember]
-        internal int size;
+        public int size;
 
         [DataMember]
-        internal string tiles;
+        public string tiles;
     }
 }

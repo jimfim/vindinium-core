@@ -4,24 +4,24 @@ using System.Runtime.Serialization;
 namespace vindiniumcore.Infrastructure.DTOs
 {
   [DataContract]
-  class Game
+  public class Game
   {
     [DataMember]
-    internal string id;
+    public string id;
 
     [DataMember]
-    internal int turn;
+    public int turn;
 
     [DataMember]
-    internal int maxTurns;
+    public int maxTurns;
 
     [DataMember]
-    internal List<Hero> heroes;
+    public List<Hero> heroes;
 
     [DataMember]
-    internal Board board;
+    public Board board;
 
     [DataMember]
-    internal bool finished;
+    public bool finished;
   }
 }

@@ -3,12 +3,12 @@
 namespace vindiniumcore.Infrastructure.DTOs
 {
   [DataContract]
-  internal class Pos
+  public class Pos
   {
     [DataMember]
-    internal int x;
+    public int x;
 
     [DataMember]
-    internal int y;
+    public int y;
   }
 }

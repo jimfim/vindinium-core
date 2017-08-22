@@ -6,30 +6,30 @@ namespace vindiniumcore.Infrastructure.DTOs
   public class Hero
   {
     [DataMember]
-    internal int id;
+    public int id;
 
     [DataMember]
-    internal string name;
+    public string name;
 
     [DataMember]
-    internal int elo;
+    public int elo;
 
     [DataMember]
-    internal Pos pos;
+    public Pos pos;
 
     [DataMember]
-    internal int life;
+    public int life;
 
     [DataMember]
-    internal int gold;
+    public int gold;
 
     [DataMember]
-    internal int mineCount;
+    public int mineCount;
 
     [DataMember]
-    internal Pos spawnPos;
+    public Pos spawnPos;
 
     [DataMember]
-    internal bool crashed;
+    public bool crashed;
   }
 }
